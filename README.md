@@ -1,4 +1,4 @@
-# Marina Vicens - Portfolio
+# mvicenss - Portfolio
 
 My personal portfolio website, built with Next.js, Tailwind CSS, and deployed to GitHub Pages.
 
