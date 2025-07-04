@@ -1,27 +1,27 @@
 "use client";
-import { Github, Mail, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 
 const socials = [
 	{
-		icon: <Twitter size={20} />,
-		href: "https://twitter.com/chronark_",
-		label: "Twitter",
-		handle: "@chronark_",
+		icon: <Linkedin size={20} />,
+		href: "https://www.linkedin.com/in/mvicens",
+		label: "Linkedin",
+		handle: "Marina P. Vicens",
 	},
 	{
 		icon: <Mail size={20} />,
-		href: "mailto:dev@chronark.com",
+		href: "mailto:mvicensss7@gmail.com",
 		label: "Email",
-		handle: "dev@chronark.com",
+		handle: `mvicensss7${String.fromCharCode(64)}gmail.com`,
 	},
 	{
 		icon: <Github size={20} />,
-		href: "https://github.com/chronark",
+		href: "https://github.com/mvicensss",
 		label: "Github",
-		handle: "chronark",
+		handle: "mvicensss",
 	},
 ];
 
@@ -32,7 +32,7 @@ export default function Example() {
 			<div className="container flex items-center justify-center min-h-screen px-4 mx-auto">
 				<div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0 sm:grid-cols-3 lg:gap-16">
 					{socials.map((s) => (
-						<Card>
+						<Card key={s.label}>
 							<Link
 								href={s.href}
 								target="_blank"
@@ -46,8 +46,16 @@ export default function Example() {
 									{s.icon}
 								</span>{" "}
 								<div className="z-10 flex flex-col items-center">
-									<span className="lg:text-xl font-medium duration-150 xl:text-3xl text-zinc-200 group-hover:text-white font-display">
-										{s.handle}
+									<span className="lg:text-xl font-medium duration-150 xl:text-3xl text-zinc-200 group-hover:text-white">
+										{s.label === "Email" ? (
+											<>
+												<span>mvicensss7</span>
+												<span style={{ fontFamily: "Times New Roman, serif", fontSize: "0.9em" }}>@</span>
+												<span>gmail.com</span>
+											</>
+										) : (
+											s.handle
+										)}
 									</span>
 									<span className="mt-4 text-sm text-center duration-1000 text-zinc-400 group-hover:text-zinc-200">
 										{s.label}
