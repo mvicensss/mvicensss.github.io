@@ -25,14 +25,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
-
+          # Quitamos la cache de pnpm aquí, la configuraremos después
+      
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
           run_install: false
-
+      
       - name: Get pnpm store directory
         shell: bash
         run: |
