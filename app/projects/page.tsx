@@ -52,7 +52,7 @@ export default async function ProjectsPage() {
             Projects
           </h2>
           <p className="mt-4 text-zinc-400">
-            Some of the projects are from work and some are on my own time.
+            Some of the projects are from university and some are on my own time.
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />
@@ -83,7 +83,7 @@ export default async function ProjectsPage() {
                   <p className="mt-4 leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300">
                     {featured.description}
                   </p>
-                  <div className="absolute bottom-4 md:bottom-8">
+                  <div className="absolute bottom-2 md:bottom-4">
                     <p className="hidden text-zinc-200 hover:text-zinc-50 lg:block">
                       Read more <span aria-hidden="true">&rarr;</span>
                     </p>
