@@ -31,7 +31,7 @@ module.exports = {
 			fontFamily: {
 				sans: ["var(--font-seasons)", ...defaultTheme.fontFamily.sans],
 				display: ["var(--font-calsans)"],
-				seasons: ["var(--font-seasons)"],
+				seasons: ["var(--font-seasons)", "Times New Roman", "serif"],
 			},
 			backgroundImage: {
 				"gradient-radial":
