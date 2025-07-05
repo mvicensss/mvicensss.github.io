@@ -8,6 +8,10 @@ const nextConfig = {
 	},
 	output: 'export',
 	trailingSlash: true,
+	skipTrailingSlashRedirect: true,
+	distDir: 'dist',
+  	assetPrefix: process.env.NODE_ENV === 'production' ? 'mvicensss.github.io' : '',
+  	basePath: process.env.NODE_ENV === 'production' ? 'mvicensss.github.io' : '',
 	images: {
 		unoptimized: true
 	}
