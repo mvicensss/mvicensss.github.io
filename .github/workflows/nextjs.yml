@@ -49,10 +49,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Remove Redis dependency
-        run: |
-          rm -f pages/api/incr.ts || true
-          pnpm remove @upstash/redis || true
 
       - name: Build with Next.js
         run: pnpm run build
