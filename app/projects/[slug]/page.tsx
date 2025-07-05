@@ -15,11 +15,16 @@ type Props = {
 
 
 export async function generateStaticParams(): Promise<Props["params"][]> {
-  return allProjects
-    .filter((p) => p.published)
-    .map((p) => ({
-      slug: p.slug,
-    }));
+  try {
+    return allProjects
+      .filter((p) => p.published)
+      .map((p) => ({
+        slug: p.slug,
+      }));
+  } catch (error) {
+    console.error("Error generating static params:", error);
+    return [];
+  }
 }
 
 export default async function PostPage({ params }: Props) {
