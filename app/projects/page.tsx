@@ -52,7 +52,7 @@ export default async function ProjectsPage() {
             Projects
           </h2>
           <p className="mt-4 text-zinc-400">
-            Some of the projects are from university and some are on my own time.
+            Main Storyline (Uni) & Side Quests (Personal).
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />

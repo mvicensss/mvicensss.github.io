@@ -1,6 +1,5 @@
 import "../global.css";
-import { Inter } from "@next/font/google";
-import LocalFont from "@next/font/local";
+import { Bodoni_Moda, Inter } from "@next/font/google";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 
@@ -46,11 +45,16 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
+const bodoni = Bodoni_Moda({
+  subsets: ["latin"],
+  variable: "--font-bodoni",
+  display: "swap",
+})
 
-const Seasons = LocalFont({
+/*const Seasons = LocalFont({
   src: "../public/fonts/the-seasons-regular.ttf",
   variable: "--font-seasons",
-});
+});*/
 
 export default function RootLayout({
   children,
@@ -58,13 +62,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[inter.variable, Seasons.variable].join(" ")}>
+    <html lang="en" className={[inter.variable, bodoni.variable].join(" ")}>
       <head>
         <Analytics />
       </head>
       <body
         style={{ backgroundColor: '#4663ac' }}
-        className={`bg-black font-seasons ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+        className={`bg-black font-sans ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
           }`}
       >
         {children}

@@ -7,15 +7,15 @@ import { Card } from "../components/card";
 const socials = [
 	{
 		icon: <Linkedin size={20} />,
-		href: "https://www.linkedin.com/in/mvicens",
+		href: "https://www.linkedin.com/in/mvicensss",
 		label: "Linkedin",
 		handle: "Marina P. Vicens",
 	},
 	{
 		icon: <Mail size={20} />,
-		href: "mailto:mvicensss7@gmail.com",
+		href: "mailto:mvicensss.dev@gmail.com",
 		label: "Email",
-		handle: `mvicensss7${String.fromCharCode(64)}gmail.com`,
+		handle: `mvicensss.dev${String.fromCharCode(64)}gmail.com`,
 	},
 	{
 		icon: <Github size={20} />,
@@ -49,7 +49,7 @@ export default function Example() {
 									<span className="lg:text-xl font-medium duration-150 xl:text-3xl text-zinc-200 group-hover:text-white">
 										{s.label === "Email" ? (
 											<>
-												<span>mvicensss7</span>
+												<span>mvicensss.dev</span>
 												<span style={{ fontFamily: "Times New Roman, serif", fontSize: "0.9em" }}>@</span>
 												<span>gmail.com</span>
 											</>
