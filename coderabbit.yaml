@@ -1,0 +1,26 @@
+# coderabbit.yaml
+language: "es-ES" # Para que te hable en español
+early_access: true # Usa modelos más nuevos (opcional)
+
+reviews:
+  profile: "chill" # Opciones: "assertive", "chill". Chill es mejor para proyectos personales.
+  request_changes_workflow: false # Para que solo comente, no bloquee el PR.
+  high_level_summary: true
+  poem: true # ¡El toque divertido! Escribe un poema sobre tu código al final.
+  
+  auto_review:
+    enabled: true
+    drafts: false # Ignorar PRs que aún son borradores.
+
+chat:
+  auto_reply: true # Puedes responderle al bot en los comentarios y te contesta.
+
+# 🛡️ La parte más importante para tu proyecto: IGNORAR ARCHIVOS
+ignore:
+  - "package-lock.json"
+  - "pnpm-lock.yaml" # Tienes pnpm, ignora este archivo gigante.
+  - ".contentlayer/**" # Ignora todo lo generado por Contentlayer.
+  - ".next/**"
+  - "public/**" # No necesitas revisión de imágenes o fuentes.
+  - "dist/**"
+  - "**/*.min.js"
