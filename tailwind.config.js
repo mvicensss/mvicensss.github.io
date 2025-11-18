@@ -29,9 +29,9 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				sans: ["var(--font-seasons)", ...defaultTheme.fontFamily.sans],
-				display: ["var(--font-calsans)"],
-				seasons: ["var(--font-seasons)", "'Times New Roman'", "serif"],
+				sans: ["var(--font-bodoni)", ...defaultTheme.fontFamily.serif],
+				display: ["var(--font-bodoni)", ...defaultTheme.fontFamily.serif],
+
 			},
 			backgroundImage: {
 				"gradient-radial":
