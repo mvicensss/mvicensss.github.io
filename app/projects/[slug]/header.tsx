@@ -17,12 +17,17 @@ type Props = {
 export const Header: React.FC<Props> = ({ project }) => {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
+	const repositoryHref = project.repository?.startsWith("http")
+		? project.repository
+		: project.repository
+			? `https://github.com/${project.repository}`
+			: undefined;
 
 	const links: { label: string; href: string }[] = [];
-	if (project.repository) {
+	if (repositoryHref) {
 		links.push({
 			label: "GitHub",
-			href: `https://github.com/${project.repository}`,
+			href: repositoryHref,
 		});
 	}
 	if (project.url) {
@@ -44,13 +49,13 @@ export const Header: React.FC<Props> = ({ project }) => {
 	return (
 		<header
 			ref={ref}
-			className="relative isolate overflow-hidden bg-gradient-to-tl from-[#4663ac] via-zinc-500 to-black"
+			className="relative isolate overflow-hidden bg-gradient-to-tl from-[#4663ac] via-[#4663ac]/90 to-black"
 		>
 			<div
 				className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
 					isIntersecting
 						? "bg-[#4663ac]/0 border-transparent"
-						: "bg-[#4663ac]/10 border-white/20 lg:border-transparent"
+						: "bg-[#1f376b]/55 border-white/30 lg:border-transparent"
 				}`}
 			>
 				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">

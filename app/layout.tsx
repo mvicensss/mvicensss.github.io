@@ -1,5 +1,6 @@
 import "../global.css";
 import { Bodoni_Moda, Inter } from "@next/font/google";
+import localFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 
@@ -50,11 +51,11 @@ const bodoni = Bodoni_Moda({
   variable: "--font-bodoni",
   display: "swap",
 })
-
-/*const Seasons = LocalFont({
+const seasons = localFont({
   src: "../public/fonts/the-seasons-regular.ttf",
   variable: "--font-seasons",
-});*/
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -62,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[inter.variable, bodoni.variable].join(" ")}>
+    <html lang="en" className={[inter.variable, bodoni.variable, seasons.variable].join(" ")}>
       <head>
         <Analytics />
       </head>

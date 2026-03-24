@@ -17,7 +17,7 @@ type Props = {
 export async function generateStaticParams(): Promise<Props["params"][]> {
   try {
     return allProjects
-      .filter((p) => p.published)
+      .filter((p) => p.published !== false)
       .map((p) => ({
         slug: p.slug,
       }));
@@ -39,11 +39,11 @@ export default async function PostPage({ params }: Props) {
     
 
   return (
-    <div className="bg-zinc-50 min-h-screen">
+    <div className="bg-zinc-100 min-h-screen">
       <Header project={project}/>
       {/* <ReportView slug={project.slug} /> */}
 
-      <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">
+      <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless prose-lg md:prose-lg max-w-2xl">
         <Mdx code={project.body.code} />
       </article>
     </div>

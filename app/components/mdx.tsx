@@ -20,7 +20,7 @@ const components = {
 	h2: ({ className, ...props }) => (
 		<h2
 			className={clsx(
-				"mt-10 scroll-m-20 border-b border-b-zinc-800 pb-1 text-3xl font-semibold tracking-tight first:mt-0",
+				"mt-12 scroll-m-20 border-b border-b-zinc-800 pb-3 text-3xl md:text-4xl font-semibold tracking-tight first:mt-0",
 				className,
 			)}
 			{...props}
@@ -73,7 +73,7 @@ const components = {
 	),
 	p: ({ className, ...props }) => (
 		<p
-			className={clsx("leading-7 [&:not(:first-child)]:mt-6", className)}
+			className={clsx("leading-8 text-zinc-500[&:not(:first-child)]:mt-7", className)}
 			{...props}
 		/>
 	),
@@ -84,7 +84,7 @@ const components = {
 		<ol className={clsx("my-6 ml-6 list-decimal", className)} {...props} />
 	),
 	li: ({ className, ...props }) => (
-		<li className={clsx("mt-2", className)} {...props} />
+		<li className={clsx("mt-3 leading-8", className)} {...props} />
 	),
 	blockquote: ({ className, ...props }) => (
 		<blockquote
@@ -154,7 +154,7 @@ const components = {
 	code: ({ className, ...props }) => (
 		<code
 			className={clsx(
-				"relative rounded border bg-zinc-300 bg-opacity-25 py-[0.2rem] px-[0.3rem] font-mono text-sm text-zinc-600",
+				"relative rounded border bg-zinc-300 bg-opacity-25 py-[0.2rem] px-[0.3rem] font-mono text-[0.95em] text-zinc-800 bg-zinc-200/60 border-zinc-300",
 				className,
 			)}
 			{...props}

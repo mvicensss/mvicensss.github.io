@@ -31,6 +31,7 @@ module.exports = {
 			fontFamily: {
 				sans: ["var(--font-bodoni)", ...defaultTheme.fontFamily.serif],
 				display: ["var(--font-bodoni)", ...defaultTheme.fontFamily.serif],
+				seasons: ["var(--font-seasons)", ...defaultTheme.fontFamily.serif],
 
 			},
 			backgroundImage: {

@@ -16,7 +16,7 @@ export default function Home() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm duration-500 text-gray-200 hover:text-slate-200"
+              className="text-base md:text-lg duration-500 text-gray-200 hover:text-slate-200"
             >
               {item.name}
             </Link>
@@ -34,7 +34,7 @@ export default function Home() {
 
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
       <div className="my-16 text-center animate-fade-in">
-        <h2 className="text-sm text-gray-200 ">
+        <h2 className="text-base md:text-base text-gray-200 ">
           Information Systems Engineering Student. Just a girl that loves to learn.
         </h2>
       </div>
