@@ -1,0 +1,36 @@
+---
+title: NFC Shopping List - Smart Grocery Management
+description: A modern, responsive web application designed to streamline grocery shopping using NFC technologie and real-time data syncronization.
+published: true
+date: 2026-08-07
+repository: mvicensss/nfc-shopping-list
+url: https://mvicensss.github.io/nfc-shopping-list
+---
+
+# NFC Shopping List: Smart Grocery Management
+A modern, responsive web application designed to streamline grocery shopping and inventory management. By leveraging Near Field Communication (NFC) technology, users can easily interact with the application to manage their shopping lists.
+
+This project was developed to merge modern frontend architectures with backend-as-a-service solutions, focusing on real-time data flow and a seamless, mobile-first user experience.
+
+## The Challenge
+The main objective was to build a fast, latency-free application that allows quick data entry via physical NFC tags, while keeping multiple devices synchronized in real-time. The UI needed to feel instantaneous, requiring the implementation of Optimistic UI patterns to update the screen before receiving server confirmation.
+
+## Tehcnologies and Tools
+* **Frontend:** React (with TypeScript) 
+* **Build Tool:** Vite
+* **Backend as a Service (BaaS):** Supabase (PostgreSQL)
+* **CI/CD:** Automated deployment via GitHub Actions.
+
+## Key Features
+* **Real-Time syncronization:** Instant updates to the list across multiple devices using Supabase.
+* **Smart Categorization:** Automated grouping of items for an optimized experience.
+* **NFC Integration:** Designed to be triggered or interacted via NFC tags for rapid entry.
+* **Optimistic UI:** The user interface updates immediately when modifying an item's state, reverting the change only if server syncronization fails.
+* **History Cleanup:** Conditional bulk deletion functionality to remove all products marked as purchased and keep the database optimized.
+
+## Development Process
+As a full-stack project, the developement cycle included:
+* **Database Architecture:** Set up the PostgreSQL schema in Supabase, utilizing `timestampz` constraints and default values for server-side accuracy.
+* **State Management:** Handled asynchronous CRUD operations and local reactive state using React Hooks.
+* **Hardware Integration:** Configured standard NFC tags with URI records to trigger teh live application direclty upon smarthone tap.
+* **Deployment:** Established a continuous integration and deployment (CD/CD) pipeline managed via GitHub Actions to automate production builds.
