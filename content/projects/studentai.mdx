@@ -1,35 +1,77 @@
 ---
-title: ML Student Dropout Prediction - Data-Driven Retention
-description: A machine learning project focused on analyzing student data and predicting dropout rates using various classification models and data preprocessing techniques.
+title: "Student Dropout Prediction — Data-Driven Retention"
+description: "A machine learning and predictive analytics project analyzing academic records to forecast student dropout risks and assist institutional retention."
+date: "2026-08-08"
 published: true
-date: 2026-08-08
-repository: mvicensss/ml-student-dropout-prediction
-url: https://github.com/username/ml-student-dropout-prediction
+repository: "mvicensss/ml-student-dropout-prediction"
 ---
 
-# ML Student Dropout Prediction: Data-Driven Retention
-A machine learning and data analysis project designed to predict student dropout rates. By thoroughly processing raw data and applying various classification algorithms, this project seeks to identify at-risk students based on historical data.
+| Overview | Details |
+| :--- | :--- |
+| **Domain** | EdTech · Data Science · Predictive Analytics |
+| **Objective** | Identify early warning indicators and predict student attrition risk using classification algorithms |
+| **Key Models** | Logistic Regression, Decision Trees, Gradient Boosting, K-Nearest Neighbors (KNN) |
+| **Pipeline Stages** | Data Wrangling, Exploratory Data Analysis (EDA), Feature Engineering, Model Benchmarking |
+| **Environment** | Python, Jupyter Notebooks, Scikit-Learn |
 
-This project was developed to explore the end-to-end data science lifecycle, focusing on data cleaning, exploratory data analysis, and evaluating multiple machine learning models to solve a real-world educational problem.
+---
 
-## The Challenge
-The main objective was to take raw student data, perform necessary cleaning and preprocessing, and build robust predictive models. The challenge involved handling raw CSV datasets, preparing the features for training, and comparing different algorithms to find the most effective approach for predicting dropouts.
+## The Challenge & Objective
 
-## Technologies and Tools
-* **Language:** Python
-* **Environment:** Jupyter Notebooks (`.ipynb`)
-* **Machine Learning Models:** Logistic Regression, Decision Tree, Gradient Boosting, and K-Nearest Neighbors (KNN)
-* **Data Management:** Raw and processed CSV data handling
+Student attrition poses significant institutional challenges in higher education, impacting both academic completion rates and university resource allocation. The objective of this project was to explore the full data science lifecycle to detect early behavioral and demographic warning indicators associated with academic dropouts.
 
-## Key Features
-* **Data Preprocessing:** Comprehensive cleaning pipelines to transform raw data (`data.csv`) into model-ready datasets (`data_cleaned.csv`).
-* **Exploratory Data Analysis:** Dedicated analysis notebooks (e.g., `Analysis_Persona2.ipynb`) to understand underlying patterns and student profiles.
-* **Multiple ML Algorithms:** Implementation of diverse models to tackle the classification problem, including Gradient Boosting, Logistic Regression, and Decision Trees.
-* **Train/Test Validation:** Structured data splitting (`data_train.csv`, `data_test.csv`) to accurately evaluate model performance.
+Key goals included:
+* **Data Cleaning & Standardization:** Transforming raw, noisy academic CSV records into curated, normalized datasets ready for statistical modeling.
+* **Comparative Algorithm Benchmarking:** Evaluating multiple supervised classification models under standardized train/test splits.
+* **Feature Interpretability:** Identifying which academic metrics (credits completed, attendance, grade trajectories) have the highest predictive weight in student retention.
 
-## Development Process
-As an end-to-end machine learning project, the development cycle included:
-* **Data Preparation:** Raw datasets were cleaned and preprocessed using dedicated Jupyter notebooks (`Limpieza_de_Dataset.ipynb`, `cleaning_and_preprocessing.ipynb`) to handle inconsistencies and format the data.
-* **Data Analysis:** Performed exploratory dataset analysis to understand features and relationships.
-* **Model Development:** Developed individual Python scripts for distinct machine learning models: `0_logistic_regression.py`, `1_decision_tree.py`, `2_Gradient_Boosting.py`, and `2_KNN_model.py`.
-* **Evaluation & Dependency Management:** Split the processed data into training and testing sets, and maintained a `requirements.txt` file for easy environment replication.
+---
+
+## Data & Machine Learning Pipeline
+
+```
+  [Raw Academic Records (CSV)]
+                │
+                ▼
+  1. Data Preprocessing & Cleaning (Handling missing values, outlier pruning)
+                │
+                ▼
+  2. Exploratory Data Analysis (Correlation matrices & persona profiling)
+                │
+                ▼
+  3. Feature Engineering & Scaling (Train/Test splits, categorical encoding)
+                │
+                ▼
+  4. Model Training & Evaluation (Benchmarking Logistic Regression, Trees, KNN, Boosting)
+                │
+                ▼
+  [Retention Risk Assessment & Performance Metrics]
+```
+
+1. **Data Preprocessing:** Implemented structured cleaning pipelines (`cleaning_and_preprocessing.ipynb`) to address inconsistencies, impute missing entries, and remove anomalies.
+2. **Exploratory Data Analysis (EDA):** Created focused persona analysis notebooks (`Analysis_Persona2.ipynb`) to uncover latent trends across student cohorts and academic milestones.
+3. **Model Selection & Training:** Built standalone model scripts (`0_logistic_regression.py`, `1_decision_tree.py`, `2_Gradient_Boosting.py`, `2_KNN_model.py`) to systematically train and benchmark predictive performance.
+
+---
+
+## Key Technical Highlights
+
+* **Multi-Model Evaluation:** Compared linear baselines against non-linear ensemble models to evaluate trade-offs between interpretability and predictive accuracy.
+* **Structured Data Pipeline:** Enforced reproducible preprocessing steps ensuring data transformations applied to training partitions carried over identically to testing datasets without data leakage.
+* **Persona-Based Analysis:** Clustered students into risk profiles to provide actionable qualitative insights alongside quantitative classification metrics.
+* **Modular Codebase:** Organized preprocessing notebooks and model scripts into modular components with documented dependencies (`requirements.txt`).
+
+---
+
+## Tech Stack
+
+* **Language:** Python 3.x
+* **Core Libraries:** Pandas, NumPy, Scikit-Learn
+* **Visualization:** Matplotlib, Seaborn
+* **Environment:** Jupyter Notebooks, Visual Studio Code
+
+---
+
+## Impact & Key Takeaways
+
+The project demonstrated how proactive, data-driven analytics can replace retrospective intervention in education. By isolating the most decisive risk factors before semester conclusions, academic counselors can deploy targeted support systems to help at-risk students stay on track.

@@ -1,0 +1,89 @@
+---
+title: "Accenture Mavericks — Document Automation System"
+description: "AI-powered document processing pipeline automating extraction, validation, and cross-referencing of Spanish notary deeds and tax declarations for public administrations."
+date: "2025-11-22"
+published: true
+repository: "velocitatem/accenture_mavericks"
+---
+
+![Accenture Mavericks Document Automation System](/accenture-mavericks.png)
+
+| Overview | Details |
+| :--- | :--- |
+| **Origin** | Accenture Mavericks Hackathon & Innovation Challenge |
+| **Domain** | GovTech · LegalTech · AI Document Intelligence |
+| **Objective** | Automate review, extraction, and cross-referencing of property transaction documents |
+| **Key Documents** | Notarial Deed of Sale (*Escritura*) & Tax Self-Assessment (*Modelo 600*) |
+| **Interface** | Streamlit Web Application & Python CLI Pipeline |
+
+---
+
+## The Challenge & Origin
+
+Developed during the **Accenture Mavericks Hackathon**, this project tackles a critical operational bottleneck in Spanish public administrations (Autonomous Communities and Notarial Offices).
+
+Every real estate transfer in Spain requires reviewing two separate documents:
+1. **Escritura de Compraventa (Deed of Sale):** A multi-page notarial contract specifying buyers, sellers, property descriptions, and ownership allocations.
+2. **Modelo 600 (Tax Self-Assessment):** The official regional tax filing (*ITP / AJD*) for the transaction.
+
+Public officials manually cross-check these complex, heterogeneous PDFs to verify that parties, cadastral references, declared prices, and ownership percentages match. This manual review takes **30–45 minutes per file**, creating backlogs and leaving room for human oversight errors.
+
+**Our goal:** Build an automated end-to-end pipeline that ingests both PDFs, extracts structured data, runs fiscal validation, detects cross-document discrepancies, and visualizes multi-party transactions in seconds.
+
+---
+
+## How It Works: The 4-Stage Pipeline
+
+```
+  [Escritura & Modelo 600 PDFs]
+               │
+               ▼
+  1. OCR Layer (Mistral OCR · Tesseract · Gemma)
+               │
+               ▼
+  2. LLM Extraction (OpenAI / Ollama + Pydantic v2 schemas)
+               │
+               ▼
+  3. Validation & Rules (DNI/NIE/CIF checksums · European decimal formatting)
+               │
+               ▼
+  4. Cross-Document Reconciliation (Fuzzy cadastral matching · Sales matrix)
+               │
+               ▼
+  [Streamlit Dashboard & Transaction Graph Visualization]
+```
+
+1. **OCR Layer:** Ingests PDFs, rasterizes pages at 300 DPI with PIL image enhancements, and routes through configurable OCR backends (**Mistral OCR** for high-accuracy cloud parsing, or **Tesseract / Gemma** for local privacy-preserving environments).
+2. **Structured LLM Extraction:** Transforms raw legal text into strictly typed JSON objects using **OpenAI** (`gpt-5-mini`) or local models (**Ollama** `nemotron-mini:4b`). Prompts enforce zero hallucinations and correct Spanish legal role mappings (*Sujeto Pasivo* = Buyer, *Transmitente* = Seller).
+3. **Deterministic Validation:** Validates data against **Pydantic v2** models and verifies Spanish tax identifiers (**DNI, NIE, CIF**) using official modulo-23 and checksum algorithms.
+4. **Cross-Document Reconciliation:** Automatically compares the Deed against Modelo 600, checking for:
+   * **Cadastral matching:** Fuzzy matching using Levenshtein distance and 14-character parcel prefix matching to overcome optical character errors.
+   * **Financial & Party alignment:** Verifies declared values, sale dates, seller/buyer NIFs, and protocol numbers.
+   * **Ownership transfer matrices:** Reconciles multi-party seller-to-buyer share percentages ($A \to B$ shares).
+
+---
+
+## Key Technical Highlights
+
+* **Multi-Provider Flexibility:** Switch between cloud providers (OpenAI, Mistral) for high accuracy and local open-source models (Tesseract, Ollama) for strict data residency.
+* **Map-Reduce Chunking (Experimental):** Slices large multi-page scans into overlapping vertical chunks, processes extractions in parallel, and merges candidate fields using majority voting and entity deduplication.
+* **Transaction Graph Visualization:** Uses **NetworkX** and **Matplotlib** to build directed bipartite graphs showing seller-to-buyer ownership flows and equity stakes per property.
+* **Redis Caching Layer:** Caches OCR and extraction results by SHA-256 document hashes (24h TTL), eliminating redundant API calls and accelerating repeat inspections.
+* **Ground-Truth Benchmarking (`eval.py`):** Includes a complete evaluation suite featuring token-based Jaccard similarity for Spanish composite names, accent stripping, and precision/recall metrics.
+
+---
+
+## Tech Stack
+
+* **Language & Core:** Python 3.12+, Pydantic v2
+* **AI & Document Vision:** OpenAI API (`gpt-5-mini`), Mistral OCR, Ollama (`nemotron-mini:4b`, `qwen3-vl`), PyMuPDF (`fitz`), Pillow, PyTesseract
+* **Data & Analytics:** NetworkX, Matplotlib, Redis
+* **Interface & Tooling:** Streamlit, Docker & Docker Compose
+
+---
+
+## Impact
+
+* **90% Time Reduction:** Decreases document verification time from ~40 minutes of manual checking down to under 15 seconds.
+* **Reliable Discrepancy Detection:** Flags missing tax forms, mismatched quotas, or conflicting property values before processing tax liquidations.
+* **Adaptable Deployment:** Ready for local on-premise public sector execution or scalable cloud deployment.

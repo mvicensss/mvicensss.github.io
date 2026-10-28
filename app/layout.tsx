@@ -1,4 +1,5 @@
 import "../global.css";
+import "katex/dist/katex.min.css";
 import { Bodoni_Moda, Inter } from "@next/font/google";
 import localFont from "next/font/local";
 import { Metadata } from "next";

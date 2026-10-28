@@ -1,0 +1,89 @@
+---
+title: "Prosper ClinicReflow — Real-Time AI Healthcare Voice Agent"
+description: "Voice-native AI receptionist for clinic operations built for HackSpain 2026, streaming bidirectional audio over WebSockets with Gemini 3.8 Live and automated schedule reflow."
+date: "2026-09-20"
+published: true
+repository: "rh45-one/hackspain-kermit-prosper"
+---
+
+![Prosper ClinicReflow](/prosper-clinicreflow.png)
+
+| Overview | Details |
+| :--- | :--- |
+| **Origin** | HackSpain 2026 (Prosper Track) · Finalist Team *KermitPanic* |
+| **Domain** | HealthTech · Voice AI · Clinical Operations |
+| **Objective** | Autonomous inbound clinic call management, patient triage, and multi-constraint schedule reflow |
+| **Voice Engine** | Native Audio-to-Audio (Gemini 3.8 Live streaming via WebSockets / Pipecat) |
+| **Backend Core** | FastAPI, Twilio Media Streams, Prosper Clinical API, Fly.io |
+
+---
+
+## The Challenge & Origin
+
+Developed during **HackSpain 2026** for the **Prosper Track**, this project addresses one of the most expensive operational headaches in outpatient healthcare: phone-based clinic scheduling and sudden doctor cancellations.
+
+In real-world clinics (such as the challenge's fictional *Clínica Arenal* in Madrid), scheduling is not a simple chat interaction—it is a strict multi-variable constraint problem involving:
+* **Patient identity & insurance policies** (e.g., verifying whether specific slots are payable with Adeslas, Sanitas, or private coverage).
+* **Provider specialties & multi-site coverage** (cross-referencing doctors, locations, and authorized languages).
+* **Referral & triage requirements** (filtering emergency symptoms according to Manchester Triage protocols).
+
+### The Core Thesis: *"The model speaks; the system decides."*
+
+When relying solely on conversational voice models, agents tend to hallucinate convenient slot times or invent patient records just to maintain conversational flow. **ClinicReflow** pairs low-latency, voice-native conversational models with a strict deterministic Python backend that enforces clinical rules, verifies insurance IDs, and submits exact booking actions.
+
+---
+
+## Architecture & Audio Pipeline
+
+```
+  [Caller / Phone (Twilio Media Streams)]
+                   │  (µ-law 8 kHz audio)
+                   ▼
+  [FastAPI WebSocket Gateway (/ws)]
+                   │
+                   ▼
+  [Voice Engine: Gemini 3.8 Live via Pipecat]
+                   │  (Native audio-to-audio)
+                   ▼
+  [Deterministic Brain (16 Clinic Tools)]
+   ├── Date Resolution (Europe/Madrid in Python)
+   ├── Insurance Validation (payable_with enums)
+   ├── Real-Time Availability (Prosper API)
+   └── Emergency Escalation (Manchester Triage → 112)
+                   │
+                   ▼
+  [Prosper Platform Submission & Action Flush]
+```
+
+1. **Audio Streaming Gateway:** Ingests inbound calls over Twilio Media Streams via WebSockets (µ-law 8 kHz), converting audio chunks into native PCM frames without intermediate speech-to-text transcoding.
+2. **Native Multimodal Voice:** Utilizes **Gemini 3.8 Live** (`gemini-3.8-live`) to manage real-time turn-taking and dynamic bilingual switching (Spanish/English) with sub-second voice latency.
+3. **Deterministic Tool Execution:** The LLM delegates real-world actions to 16 specialized backend tools that interact directly with the Prosper Clinical API, ensuring zero slot hallucinations.
+4. **Action Flush on Hangup:** Automatically dispatches validated booking, registration, rescheduling, or emergency escalation payloads to the platform within strict challenge time limits.
+
+---
+
+## Key Technical Highlights
+
+* **Voice-Native vs. Cascaded Audio:** Bypassed fragile multi-hop cascades (STT $\to$ LLM $\to$ TTS) in favor of direct audio-to-audio streaming, eliminating latency spikes and awkward conversational interruptions.
+* **Deterministic Date & Calendar Resolution:** Relative date expressions in natural language (*"el jueves que viene por la tarde"*) are resolved deterministically in Python against timezone-aware business calendars (`Europe/Madrid`), preventing date arithmetic hallucinations.
+* **Rigorous Insurance Verification:** Verifies insurance plan compatibility (`payable_with`) on every candidate slot before confirming appointments to eliminate insurance rejection errors.
+* **Manchester Triage Safety Protocol:** Recognizes high-risk clinical symptoms and triggers automated priority escalation to emergency services (112 / SAMUR) when necessary.
+* **Unified Single-Port Deployment:** Orchestrated as a single-process Fly.io service running the WebSocket voice pipeline (`/ws`), health checks (`/healthz`), and a jury-facing real-time auditing console (`/ops`).
+
+---
+
+## Tech Stack
+
+* **Language & Runtime:** Python 3.12+, uv package manager
+* **Voice & Multimodal AI:** Gemini 3.8 Live, Pipecat framework, Twilio Media Streams
+* **Web & Networking:** FastAPI, WebSockets, Uvicorn, ngrok tunneling
+* **Clinical Logic & Validation:** Pydantic, Prosper Clinical API Client
+* **DevOps & Testing:** Fly.io (Docker containerization), Pytest (400+ async tests), Ruff
+
+---
+
+## Impact & Results
+
+* **HackSpain 2026 Finalist:** Top contender in the Prosper track with consistent 4/4 passing scores across multiple complex booking and cancellation scenarios.
+* **Sub-Second Audio Turnaround:** Fluid, human-like voice interaction with zero robotic latency.
+* **Strict Operational Reliability:** Zero slot or doctor hallucinations thanks to hard architectural separation between conversational audio and scheduling execution.
