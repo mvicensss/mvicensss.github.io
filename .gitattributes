@@ -1,0 +1,2 @@
+# Contentlayer (v0.3.4) fails to parse MDX frontmatter with CRLF line endings on Windows
+*.mdx text eol=lf

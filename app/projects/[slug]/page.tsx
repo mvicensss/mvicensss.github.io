@@ -3,7 +3,6 @@ import { allProjects } from "contentlayer/generated";
 import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
 import "./mdx.css";
-//import { ReportView } from "./view";
 
 export const revalidate = 60;
 
@@ -12,7 +11,6 @@ type Props = {
     slug: string;
   };
 };
-
 
 export async function generateStaticParams(): Promise<Props["params"][]> {
   try {
@@ -35,17 +33,15 @@ export default async function PostPage({ params }: Props) {
     notFound();
   }
 
-  //const views = 0;
-    
-
   return (
-    <div className="bg-zinc-100 min-h-screen">
-      <Header project={project}/>
-      {/* <ReportView slug={project.slug} /> */}
+    <div className="min-h-screen bg-slate-50/70 pb-24">
+      <Header project={project} />
 
-      <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless prose-lg md:prose-lg max-w-2xl">
-        <Mdx code={project.body.code} />
-      </article>
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl -mt-8 sm:-mt-12 relative z-20">
+        <article className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200/80 p-6 sm:p-10 md:p-14 font-sans text-zinc-800 prose prose-zinc max-w-none">
+          <Mdx code={project.body.code} />
+        </article>
+      </main>
     </div>
   );
 }

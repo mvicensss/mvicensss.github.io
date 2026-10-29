@@ -6,6 +6,10 @@ export const PROJECT_METADATA: Record<
 	string,
 	{ label: string; badgeClass: string }
 > = {
+	"f1-race-engineer": {
+		label: "🚧 In Progress · Sports AI & Telemetry",
+		badgeClass: "bg-rose-400/10 text-rose-200 border-rose-300/25",
+	},
 	"prosper-clinicreflow": {
 		label: "Voice AI · HealthTech",
 		badgeClass: "bg-sky-400/10 text-sky-200 border-sky-300/25",

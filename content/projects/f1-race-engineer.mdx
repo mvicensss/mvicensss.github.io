@@ -1,0 +1,87 @@
+---
+title: "F1 Race Engineer — Real-Time Telemetry & Strategy AI"
+description: "Autonomous pit-wall AI strategist analyzing live Formula 1 UDP telemetry streams using CrewAI and local LLMs to make real-time tactical racing decisions."
+date: "2026-10-16"
+published: true
+repository: "mvicensss/F1-Race-Engineer"
+---
+
+| Overview | Details |
+| :--- | :--- |
+| **Domain** | Sports Analytics · Autonomous Agents · Real-Time Telemetry |
+| **Source Platform** | F1 2018 (PlayStation 4 / PC) via UDP Broadcast (Port 20777) |
+| **Objective** | Convert raw telemetry streams into actionable pit-wall strategy directives |
+| **Architecture** | Node.js UDP Ingestion $\to$ WebSocket Bus $\to$ CrewAI Agent Hierarchy |
+| **Status** | 🚧 In Active Development · Core Pipeline Functional |
+
+> 🚧 **Work in Progress:** This project is actively being developed. The UDP binary parser, WebSocket broadcast bridge, and local multi-agent CrewAI pit wall are fully operational; expanded telemetry packet parsers (lap timing, car damage) and a live dashboard are currently underway.
+
+---
+
+## The Challenge & Origin
+
+In modern motorsport, driver success depends heavily on the pit wall: a team of specialized data engineers and strategists monitoring hundreds of sensor channels to decide when to push, conserve fuel, manage tire degradation, or pit.
+
+In competitive sim racing and console sessions (such as F1 2018 on PlayStation 4), solo drivers have to manage both driving at high speeds and guessing tactical decisions without support.
+
+**The Goal:** Engineer an autonomous, real-time AI Race Engineer that intercepts native high-frequency UDP telemetry broadcast by the gaming console over the local network, parses vehicle physics and session conditions, and coordinates autonomous AI agents to deliver crisp, data-grounded racing directives.
+
+---
+
+## How It Works: The Ingestion & Strategy Pipeline
+
+```
+  [PlayStation 4 / F1 Game]
+              │  (Raw UDP 20777 broadcast)
+              ▼
+  1. Node.js Ingestion Engine (dgram socket listener)
+              │  (Binary packet extraction & normalization)
+              ▼
+  2. WebSocket Distribution Bus (ws://127.0.0.1:8080)
+              │  (Real-time JSON payload streaming)
+              ▼
+  3. Python Telemetry Ring Buffer (deque maxlen=100)
+              │
+              ▼
+  4. CrewAI Autonomous Pit Wall (Local Llama 3.1 via Ollama)
+      ├── Telemetry Data Engineer (Tool: read_telemetry)
+      └── Chief Race Strategist (Directive: Push / Hold / Pit)
+              │
+              ▼
+  [Real-Time Driver Strategic Directive]
+```
+
+1. **UDP Ingestion Layer (`nodejs_collector`):** Listens on UDP port `20777` for binary telemetry packets broadcast by the console, parsing packet headers, motion vectors (pitch, roll, yaw, g-forces), and session parameters (track temp, weather, safety car status).
+2. **WebSocket Relay:** Packages parsed structures into standardized JSON frames and broadcasts them over a local WebSocket server on `:8080`.
+3. **Telemetry Client & Ring Buffer (`telemetry_starter.py`):** Python client that auto-discovers local LAN routing for the PS4, maintains a rolling FIFO ring buffer (`deque(maxlen=100)`), and guarantees auto-reconnection if network connections drop.
+4. **Autonomous Pit-Wall Agents (`pit_wall.py`):** Employs **CrewAI** with local **Llama 3.1** via **Ollama** in a sequential reasoning workflow:
+   * **Telemetry Data Engineer Agent:** Equipped with the `read_telemetry` tool to sample the latest frames and synthesize vital signs (speed, delta, tire wear, fuel load).
+   * **Chief Race Strategist Agent:** Takes the synthesized telemetry summary and issues clear tactical orders (*"Box this lap"*, *"Increase pace to cover undercut"*, *"Conserve fuel in sector 2"*).
+
+---
+
+## Key Technical Highlights
+
+* **Decoupled Low-Latency Architecture:** Separates high-frequency network packet processing (Node.js event loop) from LLM strategic reasoning (Python asynchronous agents), preventing packet loss during inference.
+* **Hierarchical Multi-Agent Gating:** The Chief Strategist never interacts directly with raw telemetry; strict agent delegation ensures strategy directives are strictly grounded in the Data Engineer's validated summary, eliminating hallucinations.
+* **100% Local Inference & Zero Cloud Latency:** Powered by local open-weight models (**Llama 3.1 8B** via Ollama), guaranteeing low operational latency and full offline functionality during racing sessions.
+* **Resilient Network Bridging:** Implements automatic UDP address resolution and self-healing WebSocket listeners that recover gracefully from session pauses or console restarts.
+
+---
+
+## Tech Stack
+
+* **Languages:** Python 3.12+, JavaScript (ES6+ / Node.js)
+* **Agent Framework & LLMs:** CrewAI, Ollama, Llama 3.1
+* **Networking & Protocols:** UDP Sockets (`dgram`), WebSockets (`ws`), JSON streaming
+* **Data Structures:** Python `collections.deque` rolling buffer
+
+---
+
+## Current Status & Next Steps
+
+* [x] UDP binary listener for F1 2018 packets (Header, Session, Motion).
+* [x] WebSocket streaming bridge between Node.js collector and Python runtime.
+* [x] Sequential CrewAI pit-wall agents (Telemetry Engineer + Race Strategist).
+* [ ] **In Progress:** Parsing Lap Data packets (lap times, sector splits, driver position).
+* [ ] **Planned:** Live web dashboard and text-to-speech team radio voice feedback.

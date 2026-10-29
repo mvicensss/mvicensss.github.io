@@ -29,10 +29,10 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				sans: ["var(--font-bodoni)", ...defaultTheme.fontFamily.serif],
+				sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
 				display: ["var(--font-bodoni)", ...defaultTheme.fontFamily.serif],
+				bodoni: ["var(--font-bodoni)", ...defaultTheme.fontFamily.serif],
 				seasons: ["var(--font-seasons)", ...defaultTheme.fontFamily.serif],
-
 			},
 			backgroundImage: {
 				"gradient-radial":
